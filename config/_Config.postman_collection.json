@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "ace7dd83-1cf3-4910-a5cb-c59d71d3685e",
+		"name": "_Config",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save Func to Env : storeAndCompareGlobals() - pm.response.to.be",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6eb6ad46-ac35-4b05-8fbe-5dc335a0e4d5",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a5454c9a-6b88-467a-bacb-a4a6571a831b",
+						"exec": [
+							"var storeAndCompareGlobals = () => {",
+							"    ",
+							"    if (pm.response.text() !== \"\")",
+							"    {",
+							"        const responseKey = pm.info.requestName.replace(/ /g, '')+'_response';",
+							"        let currentResponse = '';",
+							"        try {",
+							"            currentResponse = JSON.stringify(pm.response.json());",
+							"        } catch(e) {",
+							"            currentResponse = pm.response.text();",
+							"        }",
+							"    ",
+							"        if (!pm.globals.has(responseKey) || !pm.globals.get(responseKey) || pm.globals.get(responseKey) === \"\") ",
+							"        {",
+							"            pm.globals.set(responseKey, currentResponse);",
+							"        } ",
+							"        else ",
+							"        {",
+							"            pm.test(responseKey, function () {",
+							"                const expectedResponse = pm.globals.get(responseKey);",
+							"                // pm.response.to.be object allows you to easily assert a set of pre-defined rules",
+							"                // (source: https://learning.getpostman.com/docs/postman/scripts/postman_sandbox_api_reference)",
+							"                pm.response.to.have.body(expectedResponse);",
+							"            });",
+							"        }",
+							"    }",
+							"",
+							"}",
+							"",
+							"pm.environment.set(\"storeAndCompareGlobals1\", storeAndCompareGlobals.toString());",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://postman-echo.com/",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Func to Env : storeAndCompareGlobals() - pm.expect",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6eb6ad46-ac35-4b05-8fbe-5dc335a0e4d5",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a5454c9a-6b88-467a-bacb-a4a6571a831b",
+						"exec": [
+							"var storeAndCompareGlobals = () => {",
+							"    ",
+							"    if (pm.response.text() !== \"\")",
+							"    {",
+							"        const responseKey = pm.info.requestName.replace(/ /g, '')+'_response';",
+							"        let currentResponse = '';",
+							"        try {",
+							"            currentResponse = JSON.stringify(pm.response.json());",
+							"        } catch(e) {",
+							"            currentResponse = pm.response.text();",
+							"        }",
+							"    ",
+							"        if (!pm.globals.has(responseKey) || !pm.globals.get(responseKey) || pm.globals.get(responseKey) === \"\") ",
+							"        {",
+							"            pm.globals.set(responseKey, currentResponse);",
+							"        } ",
+							"        else ",
+							"        {",
+							"            pm.test(responseKey, function () {",
+							"                const expectedResponse = pm.globals.get(responseKey);",
+							"                // pm.expect is a generic assertion function",
+							"                // (source: https://learning.getpostman.com/docs/postman/scripts/postman_sandbox_api_reference)",
+							"                pm.expect(currentResponse).to.eql(expectedResponse);",
+							"            });",
+							"        }",
+							"    }",
+							"",
+							"}",
+							"",
+							"pm.environment.set(\"storeAndCompareGlobals2\", storeAndCompareGlobals.toString());",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://postman-echo.com/",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Func to Env : assertResponseStatusIs200()",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7c24fcd3-c0e2-471c-9d14-6bb9a3b506f0",
+						"exec": [
+							"var assertResponseStatusIs200 = () => {",
+							"    ",
+							"    pm.test(pm.info.requestName.replace(/ /g, '')+'_status', function() {",
+							"        pm.response.to.have.status(200);",
+							"        pm.response.to.be.ok;",
+							"    });",
+							"",
+							"}",
+							"",
+							"pm.environment.set(\"assertResponseStatusIs200\", assertResponseStatusIs200.toString());",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://postman-echo.com/",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Func to Env : assertKeycloakLogout()",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7c24fcd3-c0e2-471c-9d14-6bb9a3b506f0",
+						"exec": [
+							"var assertKeycloakLogout = () => {",
+							"    ",
+							"    pm.test(pm.info.requestName.replace(/ /g, '')+'_status', function() {",
+							"        pm.response.to.have.status(204);",
+							"        pm.response.to.have.status(\"No Content\");",
+							"    });",
+							"",
+							"}",
+							"",
+							"pm.environment.set(\"assertKeycloakLogout\", assertKeycloakLogout.toString());",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://postman-echo.com/",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
