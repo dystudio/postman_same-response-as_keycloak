@@ -13,7 +13,7 @@ The following are typical workflows for API development and testing
 * **Development of a new API**
 * **Integration testing at API-level**
 
-For more details about the problem please go to the `restassured_same-response-as_keycloak` repository
+For more details about the problem please go to repository [`restassured_same-response-as_keycloak`](https://github.com/raketensilo/restassured_same-response-as_keycloak)
 
 ### (II) A solution attempt with Postman
 
@@ -43,14 +43,13 @@ Versions used (other versions may differ)
 * go into the `docker` subfolder of this repository and run `docker-compose up` to start 2 docker containers each containing a keycloak server
 
 ### (IV) Usage instructions
-#### 1. Re-use of functions when writing tests
-%%%%% GIF: discussing 1 collection %%%%%
-#### 2. Executing a 'collection' of tests at once
-%%%%% GIF: running a collection  %%%%%
-#### 3. Executing tests in environment A then in environment B
-* Running tests in 'kc1' environment and recording 'expected' API responses
-* Re-running tests in 'kc2' environment and comparing API response against 'expected' API responses
-%%%%% GIF %%%%%
+#### 1. Test example
+![](./_images/ListOfRoles/1-request-header.png)
 
+![](./_images/ListOfRoles/2-test.png)
 
-**... TO BE CONTINUED ...**
+![](./_images/ListOfRoles/3-test-results.png)
+#### 2. Run collection against kc1 (Keycloak 1) to record expected responses
+![](./_images/CollectionRunner/kc1.png)
+#### 3. Re-run collection against kc2 to compare actual and expected response
+![](./_images/CollectionRunner/kc2.png)
